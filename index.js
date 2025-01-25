@@ -1,16 +1,16 @@
 import express from "express";
 import mongoose from "mongoose";
-import { register, login, users } from "./controllers/users.js";
 import dotenv from "dotenv";
+import usersRouter from "./routes/users.js";
+import messagesRouter from "./routes/message.js";
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 
-app.get("/users", users);
-app.post("/register", register);
-app.post("/login", login);
+app.use("/users", usersRouter);
+app.use("/messages", messagesRouter);
 
 mongoose
     .connect(process.env.MONGO_DB_URL)
